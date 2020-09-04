@@ -17,7 +17,7 @@ class Deck:
             for fill in self.fillList:
                 for shape in self.shapeList:
                     for number in self.numList:
-                        cardUrl = consts.IMAGE_PATH+color+" "+fill+" "+shape+" "+index+".gif"
+                        cardUrl = consts.IMAGE_PATH+color+" "+fill+" "+shape+index+consts.IMAGE_FORMAT
                         self.cardList.append(Card(color, fill, shape, number,cardUrl))
                         index = index+1
 
