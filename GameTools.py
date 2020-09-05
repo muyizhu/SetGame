@@ -36,3 +36,12 @@ class GameController:
             resize = self.resize(pilImage,consts.RESIZE_RATIO)
             img = ImageTk.PhotoImage(resize)
             container.append(img)
+    
+    #Event Listener 
+    def chooseCard(self,i,j,deck,button):
+        print("i",i)
+        print("j",j)
+        print(button)
+        key = i*consts.DESK_CARDS_ONEROW+j
+        deck.chooseCardFromDesk(key)
+        #print(deck.chosenCards)

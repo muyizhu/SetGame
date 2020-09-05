@@ -8,6 +8,7 @@ class UserInterface:
         self.deck = deck
         self.window = tk.Tk()
         self.deskCardImages = []
+        self.buttonList = []
 
     #public function, used to start the gameUI
     def drawMain(self):
@@ -65,10 +66,17 @@ class UserInterface:
 
     def showDesk(self,bodyFrame):
         index = 0
+        buttonList = []
         for i in range(0,consts.DESK_CARDS_ONECOL):
+            rowList = []
             for j in range(0,consts.DESK_CARDS_ONEROW):
-                tk.Label(bodyFrame,image = self.deskCardImages[index]).grid(row = i,column=j)
+                button = tk.Button(bodyFrame,
+                                image = self.deskCardImages[index],
+                                command = lambda: self.controller.chooseCard(i,j,self.deck,button) )
+                button.grid(row = i,column=j)
+                rowList.append(button)
                 index+=1
+            buttonList.append(rowList)
 
     #-------------------------------------bodyFrame End here--------------------------------------------------
 
