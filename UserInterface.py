@@ -1,4 +1,4 @@
-import Tkinter as tk
+import tkinter as tk
 import Constants as consts
 
 class UserInterface:
@@ -6,7 +6,13 @@ class UserInterface:
         self.validator = validator
         self.controller = controller
         self.deck = deck
-
+        self.window = tk.Tk()
     #initialize start menu (graphical interface for user)
+    def initWindow(self):
+        length = consts.WINDOW_LENGTH
+        height = consts.WINDOW_HEIGHT
+        self.window.title(consts.GAME_NAME)
+        self.window.geometry("%dx%d" % (length,height))
     def drawStartMenu(self):
-        pass
+        self.initWindow()
+        self.window.mainloop()
