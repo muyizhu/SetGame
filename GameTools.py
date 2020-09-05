@@ -4,7 +4,7 @@ class GameValidator:
     def _init_(self):
         pass
 
-    def validateSet(self):
+    def validateSet(self,chosenCards):
         pass
 
 class GameController:

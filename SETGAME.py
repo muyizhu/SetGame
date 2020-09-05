@@ -10,6 +10,7 @@ class SETGAME:
         self.ui = UI.UserInterface(self.deck,self.validator,self.GameController)
     
     def start(self):
+        self.deck.readyForGame()
         self.ui.drawMain()
 
 if __name__=="__main__":
