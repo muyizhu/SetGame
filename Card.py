@@ -1,6 +1,7 @@
 class Card:
 
-    def __init__(self, Color, Shape, Fill, Number,url):
+    def __init__(self, ID, Color, Shape, Fill, Number,url):
+        self.id = ID
         self.color = Color
         self.fill = Fill
         self.shape = Shape
@@ -17,6 +18,8 @@ class Card:
     def getNumber(self):
         return self.number
     def getAll(self):
-        return (self.color, self.fill,self.shape,self.number)
+        return (self.id,self.color, self.fill,self.shape,self.number,self.url)
     def getUrl(self):
         return self.url
+    def getID(self):
+        return self.id

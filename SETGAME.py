@@ -6,11 +6,11 @@ class SETGAME:
     def __init__(self):
         self.deck = Deck.Deck()
         self.validator = GameTools.GameValidator()
-        self.UIController = GameTools.UIController()
-        self.ui = UI.UserInterface(self.deck,self.validator,self.UIController)
+        self.GameController = GameTools.GameController()
+        self.ui = UI.UserInterface(self.deck,self.validator,self.GameController)
     
     def start(self):
-        self.ui.drawStartMenu()
+        self.ui.drawMain()
 
 if __name__=="__main__":
     setGame = SETGAME()
