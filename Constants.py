@@ -2,6 +2,7 @@
 #CardImages path
 
 IMAGE_PATH = "./CardImages/"
+
 IMAGE_FORMAT = ".gif"
 
 #DECK 

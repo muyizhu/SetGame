@@ -1,6 +1,7 @@
 import Constants as consts
 
 class GameValidator:
+
     def _init_(self):
         pass
 

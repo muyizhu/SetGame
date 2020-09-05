@@ -10,10 +10,15 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="550d6b7f-c5b7-4c06-82d0-e9c0a6ad3cfe" name="Default Changelist" comment="visit">
-      <change afterPath="$PROJECT_DIR$/Desk.py" afterDir="false" />
+    <list default="true" id="550d6b7f-c5b7-4c06-82d0-e9c0a6ad3cfe" name="Default Changelist" comment="create desk obkject">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Card.py" beforeDir="false" afterPath="$PROJECT_DIR$/Card.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/Constants.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Deck.py" beforeDir="false" afterPath="$PROJECT_DIR$/Deck.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Desk.py" beforeDir="false" afterPath="$PROJECT_DIR$/Desk.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameTools.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameTools.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SETGAME.py" beforeDir="false" afterPath="$PROJECT_DIR$/SETGAME.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserInterface.py" beforeDir="false" afterPath="$PROJECT_DIR$/UserInterface.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +119,14 @@
       <option name="project" value="LOCAL" />
       <updated>1599290222344</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="create desk obkject">
+      <created>1599331227064</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1599331227064</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -131,17 +143,18 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Create Desk.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create Desk.py" />
+    <MESSAGE value="create desk obkject" />
+    <option name="LAST_COMMIT_MESSAGE" value="create desk obkject" />
   </component>
   <component name="WindowStateProjectService">
     <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1599330676211">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1599330676211" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1599291263471">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1599331231101">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1599291263471" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1599331231101" />
     <state x="753" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1599289257480">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

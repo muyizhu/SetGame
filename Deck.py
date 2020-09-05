@@ -5,7 +5,6 @@ import random
 Card = Card.Card
 
 class Deck:
-    
     def __init__(self):
         self.cardDict = []  # card dictionary only for index or read card
         self.chosenCards = [] # cards who are chosen by player

@@ -16,3 +16,4 @@ class SETGAME:
 if __name__=="__main__":
     setGame = SETGAME()
     setGame.start()
+    
