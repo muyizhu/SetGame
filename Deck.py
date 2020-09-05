@@ -36,9 +36,13 @@ class Deck:
     def getCard(self, ID):
         return self.cardDict[ID]
     
-    #takes in an interger index and choose the card from deskCards, put its index into chosenCards
-    def chooseCardFromDesk(self,ID):
-        pass
+    #takes in an interger index and choose the card from deskCards, put the card into chosenCards
+    def chooseCardFromDesk(self,index):
+        print("index",index)
+        card = self.deskCards[index]
+        if card.getID() in self.chosenCards:
+            return
+        self.chosenCards.append(card.getID())
 
     
     def chooseCardsFromDesk(self,IDs):
