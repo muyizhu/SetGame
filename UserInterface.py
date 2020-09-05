@@ -7,6 +7,7 @@ class UserInterface:
         self.controller = controller
         self.deck = deck
         self.window = tk.Tk()
+        self.deskCardImages = []
 
     #public function, used to start the gameUI
     def drawMain(self):
@@ -56,20 +57,18 @@ class UserInterface:
 
 
     #-------------------------------------bodyFrame start here------------------------------------------------
-    def setGameBody(self,bodyFrame):
-        bodyWidth = consts.DESK_WIDTH
-        bodyHeight = consts.DESK_HEIGHT
-        canvas = tk.Canvas(bodyFrame,height = bodyHeight,width=bodyWidth)
-        cardsOneRow = consts.DESK_CARDS_ONEROW
-        cardsOneCol = consts.DESK_CARDS_ONECOL
-        deskCards = self.deck.deskCards
+    def setGameBody(self,bodyFrame):  
+        self.controller.loadCardsImage(self.deck.deskCards,self.deskCardImages)
+        self.showDesk(bodyFrame)
+        # canvas.create_image(0,0, anchor='nw', image=img)
+        # canvas.pack()
+
+    def showDesk(self,bodyFrame):
         index = 0
-        for i in range(cardsOneCol):
-            for j in range(cardsOneRow):
-                card = deskCards[index]
-                image = tk.PhotoImage(file=card.getUrl())
-                index = index+1
-                tk.Label(bodyFrame, image=image).grid(row=i, column=j)#, padx=10, pady=10, ipadx=5, ipady=5
+        for i in range(0,consts.DESK_CARDS_ONECOL):
+            for j in range(0,consts.DESK_CARDS_ONEROW):
+                tk.Label(bodyFrame,image = self.deskCardImages[index]).grid(row = i,column=j)
+                index+=1
 
     #-------------------------------------bodyFrame End here--------------------------------------------------
 
