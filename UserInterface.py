@@ -64,20 +64,27 @@ class UserInterface:
         # canvas.create_image(0,0, anchor='nw', image=img)
         # canvas.pack()
 
+    
     def showDesk(self,bodyFrame):
-        index = 0
-        buttonList = []
+        index=0
+        integers = []
         for i in range(0,consts.DESK_CARDS_ONECOL):
-            rowList = []
             for j in range(0,consts.DESK_CARDS_ONEROW):
+                integers.append(i*consts.DESK_CARDS_ONEROW+j)
                 button = tk.Button(bodyFrame,
                                 image = self.deskCardImages[index],
-                                command = lambda: self.controller.chooseCard(i,j,self.deck,button) )
+                                command = self.makeLambda(i,j,self.deck) )
                 button.grid(row = i,column=j)
-                rowList.append(button)
                 index+=1
-            buttonList.append(rowList)
 
+    def makeLambda(self,i,j,deck):
+        return lambda: self.controller.chooseCard(i,j,deck)
+
+    def createCardButton(self,index,row,col,bodyFrame):
+        button1 = tk.Button(bodyFrame,
+            image = self.deskCardImages[index],
+            command = lambda: self.controller.chooseCard(0,1,self.deck) )
+        return button1
     #-------------------------------------bodyFrame End here--------------------------------------------------
 
 
