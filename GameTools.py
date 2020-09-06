@@ -62,20 +62,21 @@ class GameController:
         card = deck.deskCards[key]
         relief = None
         needToBack = -1
+        thick = consts.NORMAL_THICKNESS
         if card not in deck.chosenCards:
             needToBack = deck.chooseCardFromDesk(key)
             relief = "ridge"
+            thick = consts.CHOSEN_THICKNESS
         else:
             deck.cancelChosen(card)
             relief = "raised"
         if needToBack !=-1:
             self.changeChosenCardImage(deck,ui.deskCardImages,needToBack)
-            print("needtoremvoe",needToBack)
             row = needToBack//consts.DESK_CARDS_ONEROW
             col = needToBack%consts.DESK_CARDS_ONEROW
-            ui.makeButton(row,col,bodyFrame,relief = 'raised')
+            ui.makeButton(row,col,bodyFrame,relief = 'raised',thickness=consts.NORMAL_THICKNESS)
         self.changeChosenCardImage(deck,ui.deskCardImages,key)
-        ui.makeButton(i,j,bodyFrame,relief = relief)
+        ui.makeButton(i,j,bodyFrame,relief = relief,thickness=thick)
 
     def changeChosenCardImage(self,deck,deskCardImages,index):
         card = deck.deskCards[index]

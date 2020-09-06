@@ -1,5 +1,6 @@
 import tkinter as tk
 import Constants as consts
+import GameClock
 
 class UserInterface:
     def __init__(self,deck,validator,controller):
@@ -18,6 +19,7 @@ class UserInterface:
         topFrame.pack()
         bodyFrame.pack()
         bottomFrame.pack()
+        self.setTopFrame(topFrame)
         self.setGameBody(bodyFrame)
         self.setControlButton(bottomFrame)
         self.window.mainloop()
@@ -56,6 +58,13 @@ class UserInterface:
         difficultyMenu.add_command(label="hard",command=self.controller.changeGameDifficulty(consts.HARD,self.deck))
     #-------------------------------------MenuBar End here-----------------------------------------------------
 
+    #----------------------------------Set up TopFrame here---------------------------------------------------  
+    def setTopFrame(self,topFrame):
+        self.setClock(topFrame)
+
+    def setClock(self,topFrame):
+        GameClock.Clock(self.window,topFrame)
+        
 
     #-------------------------------------bodyFrame start here------------------------------------------------
     def setGameBody(self,bodyFrame):  
@@ -75,7 +84,7 @@ class UserInterface:
     def clickCardLambda(self,i,j,deck,bodyFrame):
         return lambda: self.controller.clickCard(i,j,deck,self,bodyFrame)
 
-    def makeButton(self,row,col,bodyFrame,bd=None,relief='raised',callback = clickCardLambda):
+    def makeButton(self,row,col,bodyFrame,bd=None,relief='raised',callback = clickCardLambda,thickness=consts.NORMAL_THICKNESS):
         key = row*consts.DESK_CARDS_ONEROW+col
         button = tk.Button(bodyFrame,
                         width = consts.BUTTON_WIDTH,
@@ -84,6 +93,7 @@ class UserInterface:
                         relief = relief,
                         command = callback(self,row,col,self.deck,bodyFrame),
                         borderwidth=bd)
+        button.config(highlightthickness=thickness)
         button.grid(row = row,column=col)
     #-------------------------------------bodyFrame End here--------------------------------------------------
     def setControlButton(self,bottomFrame):
