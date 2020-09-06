@@ -67,29 +67,38 @@ class UserInterface:
     
     def showDesk(self,bodyFrame):
         index=0
-        integers = []
         for i in range(0,consts.DESK_CARDS_ONECOL):
             for j in range(0,consts.DESK_CARDS_ONEROW):
-                integers.append(i*consts.DESK_CARDS_ONEROW+j)
-                button = tk.Button(bodyFrame,
-                                image = self.deskCardImages[index],
-                                command = self.makeLambda(i,j,self.deck) )
-                button.grid(row = i,column=j)
+                self.makeButton(i,j,bodyFrame)
                 index+=1
 
-    def makeLambda(self,i,j,deck):
-        return lambda: self.controller.chooseCard(i,j,deck)
+    def clickCardLambda(self,i,j,deck,bodyFrame):
+        return lambda: self.controller.clickCard(i,j,deck,self,bodyFrame)
 
-    def createCardButton(self,index,row,col,bodyFrame):
-        button1 = tk.Button(bodyFrame,
-            image = self.deskCardImages[index],
-            command = lambda: self.controller.chooseCard(0,1,self.deck) )
-        return button1
+    def makeButton(self,row,col,bodyFrame,bd=None,relief='raised',callback = clickCardLambda):
+        key = row*consts.DESK_CARDS_ONEROW+col
+        button = tk.Button(bodyFrame,
+                        width = consts.BUTTON_WIDTH,
+                        height = consts.BUTTON_HEIGHT,
+                        image = self.deskCardImages[key],
+                        relief = relief,
+                        command = callback(self,row,col,self.deck,bodyFrame),
+                        borderwidth=bd)
+        button.grid(row = row,column=col)
     #-------------------------------------bodyFrame End here--------------------------------------------------
-
-
-    def setControlButton(self,frameBottom):
-        pass
+    def setControlButton(self,bottomFrame):
+        button = tk.Button(bottomFrame,
+                        # width = consts.BUTTON_WIDTH,
+                        # height = consts.BUTTON_HEIGHT,
+                        text = "submit",
+                        justify="center",
+                        pady=0,
+                        anchor = 's',
+                        #padx=100, background="blue",
+                        command = self.validator.validateLambda(self.deck),
+                        )
+        button.grid(row = 6, column = 3)
+        
     #set up submitted button
 
     #set up memu

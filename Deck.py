@@ -38,11 +38,10 @@ class Deck:
     
     #takes in an interger index and choose the card from deskCards, put the card into chosenCards
     def chooseCardFromDesk(self,index):
-        print("index",index)
         card = self.deskCards[index]
-        if card.getID() in self.chosenCards:
+        if card in self.chosenCards:
             return
-        self.chosenCards.append(card.getID())
+        self.chosenCards.append(card)
 
     
     def chooseCardsFromDesk(self,IDs):
@@ -57,8 +56,9 @@ class Deck:
         pass
 
     #cancel the chosen statue of one card, given index of the card in chosenList
-    def cancelChosen(self, ID):
-        pass
+    def cancelChosen(self, card):
+        if card in self.chosenCards:
+            self.chosenCards.remove(card)
 
     #cancel all the chosen cards'chosen statue, clear chosenList and put all cards in it back to cardList
     def cancelAllChosen(self):
