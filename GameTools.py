@@ -1,5 +1,6 @@
 import Constants as consts
 from PIL import Image, ImageTk 
+import tkinter.messagebox
 class GameValidator:
     def _init_(self):
         pass
@@ -8,11 +9,10 @@ class GameValidator:
         return False
 
     def validateView(self,deck):
-        import tkinter.messagebox
         if(self.validateSet(deck.chosenCards)):
             deck.deleteChosenCardsFromDesk()
         else:
-            tkinter.messagebox.showinfo("game mention", "chosen set is not right!!")
+            tkinter.messagebox.askokcancel("game mention", "chosen set is not right!!")
 
     def validateLambda(self,deck):
         return lambda: self.validateView(deck)
@@ -32,6 +32,16 @@ class GameController:
     def changeGameDifficulty(self,newDiff,deck):
         pass
 
+    #GUI SHOWING METHOD
+    def onClosingLambda(self,window,deck,clock):
+        return lambda: self.on_closing(window,deck,clock)
+
+    def on_closing(self,window,deck,clock):
+        import time
+        if tkinter.messagebox.askokcancel("Quit", "are you really sure you want to give up?"):
+            tkinter.messagebox.askokcancel("Game report", "you finished "+str(len(deck.finishCards))+" cards in "+str(time.time()-clock.time_start)+" seconds")
+            window.destroy()
+        
     #Controll method for UserInterface
     def resize(self,pil_image,ratio):  
         w,h =  pil_image.size

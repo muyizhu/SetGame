@@ -11,6 +11,7 @@ class Deck:
         self.chosenCards = [] # cards who are chosen by player
         self.deskCards = [] # cards that player is playing 
         self.cardPool = [] # cards that store the real cards, it will decrease and increase dynamically.
+        self.finishCards = []
         self.deskCapacity = consts.DESK_CARDS_CAPACITY 
         self.colorList = consts.COLOR_LIST
         self.fillList = consts.FILL_LIST
@@ -110,3 +111,6 @@ class Deck:
         random.shuffle(self.cardPool)
         random.shuffle(self.cardPool)
         random.shuffle(self.cardPool)
+
+    def deleteChosenCardsFromDesk(self):
+        pass

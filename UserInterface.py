@@ -10,6 +10,7 @@ class UserInterface:
         self.window = tk.Tk()
         self.deskCardImages = []
         self.buttonList = []
+        self.clock = None
 
     #public function, used to start the gameUI
     def drawMain(self):
@@ -22,7 +23,10 @@ class UserInterface:
         self.setTopFrame(topFrame)
         self.setGameBody(bodyFrame)
         self.setControlButton(bottomFrame)
+        self.window.protocol("WM_DELETE_WINDOW", self.controller.onClosingLambda(self.window,self.deck,self.clock) )
         self.window.mainloop()
+
+
     
     #initialize rootwindow basic attribute, length height and titile
     def initWindow(self):
@@ -63,7 +67,7 @@ class UserInterface:
         self.setClock(topFrame)
 
     def setClock(self,topFrame):
-        GameClock.Clock(self.window,topFrame)
+        self.clock = GameClock.Clock(self.window,topFrame)
         
 
     #-------------------------------------bodyFrame start here------------------------------------------------
