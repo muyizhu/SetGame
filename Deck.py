@@ -39,13 +39,24 @@ class Deck:
     #takes in an interger index and choose the card from deskCards, put the card into chosenCards
     def chooseCardFromDesk(self,index):
         card = self.deskCards[index]
+        result = -1
         if card in self.chosenCards:
-            return
+            print("length of chosen",len(self.chosenCards))
+            return -1
+        elif len(self.chosenCards)==3:
+            first = self.chosenCards[0]
+            self.chosenCards = self.chosenCards[1:]
+            for i in range(0,len(self.deskCards)):
+                if self.deskCards[i] == first:
+                    result = i
+                    break
         self.chosenCards.append(card)
+        print("length of chosen",len(self.chosenCards))
+        return result
 
     
-    def chooseCardsFromDesk(self,IDs):
-        pass
+    # def chooseCardsFromDesk(self,IDs):
+    #     pass
 
     #randomly choose a card from deskCards, put its index into chosenCards
     def chooseCardFromDeskRandom(self):
@@ -57,8 +68,16 @@ class Deck:
 
     #cancel the chosen statue of one card, given index of the card in chosenList
     def cancelChosen(self, card):
-        if card in self.chosenCards:
-            self.chosenCards.remove(card)
+        if self.chosenCards[0]==card:
+            self.chosenCards = self.chosenCards[1:]
+            return
+        if self.chosenCards[len(self.chosenCards)-1]==card:
+            self.chosenCards = self.chosenCards[0:len(self.chosenCards)-1]
+            return
+        for i in range(0,len(self.chosenCards)):
+            if self.chosenCards[i] == card:
+                self.chosenCards = self.chosenCards[0:i-1]+self.chosenCards[i+1:]
+                return
 
     #cancel all the chosen cards'chosen statue, clear chosenList and put all cards in it back to cardList
     def cancelAllChosen(self):

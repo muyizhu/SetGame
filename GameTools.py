@@ -10,7 +10,7 @@ class GameValidator:
     def validateView(self,deck):
         import tkinter.messagebox
         if(self.validateSet(deck.chosenCards)):
-            deck.deleteChosenCards()
+            deck.deleteChosenCardsFromDesk()
         else:
             tkinter.messagebox.showinfo("game mention", "chosen set is not right!!")
 
@@ -61,12 +61,19 @@ class GameController:
         key = i*consts.DESK_CARDS_ONEROW+j
         card = deck.deskCards[key]
         relief = None
+        needToBack = -1
         if card not in deck.chosenCards:
-            deck.chooseCardFromDesk(key)
+            needToBack = deck.chooseCardFromDesk(key)
             relief = "ridge"
         else:
             deck.cancelChosen(card)
             relief = "raised"
+        if needToBack !=-1:
+            self.changeChosenCardImage(deck,ui.deskCardImages,needToBack)
+            print("needtoremvoe",needToBack)
+            row = needToBack//consts.DESK_CARDS_ONEROW
+            col = needToBack%consts.DESK_CARDS_ONEROW
+            ui.makeButton(row,col,bodyFrame,relief = 'raised')
         self.changeChosenCardImage(deck,ui.deskCardImages,key)
         ui.makeButton(i,j,bodyFrame,relief = relief)
 
