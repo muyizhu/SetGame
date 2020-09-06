@@ -26,7 +26,6 @@ class Deck:
                         cardUrl = consts.IMAGE_PATH+color+" "+fill+" "+shape+str(num%3+1)+consts.IMAGE_FORMAT
                         card = Card(index,color, fill, shape, number,cardUrl)
                         self.cardDict.append(card)
-                        self.cardPool.append(card)
                         num = num+1
                         index = index+1
 
@@ -43,7 +42,7 @@ class Deck:
         result = -1
         if card in self.chosenCards:
             return -1
-        elif len(self.chosenCards)==3:
+        elif len(self.chosenCards)==consts.MAX_SUBMIT_CARDS_NUM:
             first = self.chosenCards[0]
             self.chosenCards = self.chosenCards[1:]
             result = self.findCardInDesk(first)
@@ -88,6 +87,8 @@ class Deck:
     def fillDesk(self):
         random.shuffle(self.cardPool)
         for i in range(0,self.deskCapacity):
+            if len(self.cardPool) == 0:
+                return
             if i<len(self.deskCards) and self.deskCards[i] == -1:
                 self.deskCards[i] = self.cardPool.pop()
             elif i>=len(self.deskCards):
@@ -101,9 +102,11 @@ class Deck:
 
     #initialize the desk
     def readyForGame(self):
+        import copy
         self.clearFinishCards()
         self.cancelAllChosen()
         self.clearDesk()
+        self.cardPool = copy.deepcopy(self.cardDict)
         self.shuffle()
         self.fillDesk()
 
@@ -114,8 +117,6 @@ class Deck:
         random.shuffle(self.cardPool)
     
     def clearFinishCards(self):
-        for card in self.finishCards:
-            self.cardPool.append(card)
         self.finishCards = []
 
     def deleteChosenCardsFromDesk(self):

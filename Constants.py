@@ -41,7 +41,12 @@ EASY = "easy"
 MIDDLE = "middle"
 HARD = "hard"
 DIFFICULTY = EASY
+MAX_SUBMIT_CARDS_NUM = 10
 
 #CLOCK
 CLOCK_ROW = 0
-CLOCK_COL = 0
+CLOCK_COL = 4
+
+#restart button
+RESTART_ROW = 0
+RESTART_COL = 0

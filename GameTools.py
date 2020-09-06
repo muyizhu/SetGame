@@ -7,6 +7,12 @@ class GameValidator:
 
     def validateSet(self,chosenCards):
         return True
+    
+    def canGameContinue(self,deck):
+        if len(deck.finishCards) >10:
+            return False
+        return True
+        
 
     def validateView(self,deck,ui):
         if(self.validateSet(deck.chosenCards)):
@@ -15,12 +21,24 @@ class GameValidator:
                 control = GameController()
                 img = control.resizeCardToNormal(deck.cardDict[0])
                 ui.makeLabel(p,ui.bodyFrame,img,text="empty")
+            self.updateMessage(deck,ui)
+            if (not self.canGameContinue(deck)):
+                import time
+                tkinter.messagebox.askokcancel("Game report", "Exllent!! you find all set in "+str(time.time()-ui.clock.time_start)+" seconds")
         else:
             tkinter.messagebox.askokcancel("game mention", "chosen set is not right!!")
 
     def validateLambda(self,deck,ui):
         return lambda: self.validateView(deck,ui)
     
+    def getCurrentGameLog(self,deck):
+        return "you have finished "+str(len(deck.finishCards))+"cards. "+str(len(deck.cardDict)-len(deck.finishCards))+" cards left."
+    
+    def updateMessage(self,deck,ui):
+        import tkinter
+        string = self.getCurrentGameLog(deck)
+        w = tkinter.Label(ui.bottomFrame, text=string)
+        w.grid(row=6,column=4)
 
 class GameController:
     #Control methods for options in menubar
@@ -105,6 +123,18 @@ class GameController:
     def fillDesk(self,deck,ui):
         deck.fillDesk()
         ui.setGameBody(ui.bodyFrame)
+    
+    def getCurrentGameLog(self,deck):
+        return "you have finished "+str(len(deck.finishCards))+"cards. "+str(len(deck.cardDict)-len(deck.finishCards))+" cards left."
+    
+    def restartLambda(self,deck,ui):
+        return lambda: self.restart(deck,ui)
+    
+    def restart(self,deck,ui):
+        deck.readyForGame()
+        ui.setTopFrame(ui.topFrame)
+        ui.setGameBody(ui.bodyFrame)
+        ui.setControlButton(ui.bottomFrame)
     
     
         

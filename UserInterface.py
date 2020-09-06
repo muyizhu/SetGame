@@ -24,7 +24,6 @@ class UserInterface:
         self.setTopFrame(self.topFrame)
         self.setGameBody(self.bodyFrame)
         self.setControlButton(self.bottomFrame)
-        self.window.protocol("WM_DELETE_WINDOW", self.controller.onClosingLambda(self.window,self.deck,self.clock) )
         self.window.mainloop()
 
 
@@ -81,10 +80,24 @@ class UserInterface:
     #----------------------------------Set up TopFrame here---------------------------------------------------  
     def setTopFrame(self,topFrame):
         self.setClock(topFrame)
+        self.setRestartButton(topFrame)
 
     def setClock(self,topFrame):
         self.clock = GameClock.Clock(self.window,topFrame)
-        
+        self.window.protocol("WM_DELETE_WINDOW", self.controller.onClosingLambda(self.window,self.deck,self.clock) )
+    
+    def setRestartButton(self,topFrame):
+        restart = tk.Button(topFrame,
+                        # width = consts.BUTTON_WIDTH,
+                        # height = consts.BUTTON_HEIGHT,
+                        text = "restart game",
+                        justify="center",
+                        pady=0,
+                        anchor = 's',
+                        #padx=100, background="blue",
+                        command = self.controller.restartLambda(self.deck,self)
+                        )
+        restart.grid(row = consts.RESTART_ROW, column=consts.RESTART_COL)
 
     #-------------------------------------bodyFrame start here------------------------------------------------
     def setGameBody(self,bodyFrame): 
@@ -117,7 +130,6 @@ class UserInterface:
     def makeButton(self,row,col,bodyFrame,bd=None,relief='raised',callback = clickCardLambda,thickness=consts.NORMAL_THICKNESS):
         key = row*consts.DESK_CARDS_ONEROW+col
         if self.deskCardImages[key] == -1:
-            print("asdfasjfkasjdflkjaldjflajdk")
             return
         button = tk.Button(bodyFrame,
                         width = consts.BUTTON_WIDTH,
@@ -130,6 +142,18 @@ class UserInterface:
         button.grid(row = row,column=col)
     #-------------------------------------bodyFrame End here--------------------------------------------------
     def setControlButton(self,bottomFrame):
+        filldesk = tk.Button(bottomFrame,
+                        # width = consts.BUTTON_WIDTH,
+                        # height = consts.BUTTON_HEIGHT,
+                        text = "fill desk",
+                        justify="left",
+                        pady=0,
+                        anchor = 's',
+                        #padx=100, background="blue",
+                        command = self.controller.fillDeskLambda(self.deck,self),
+                        )
+        filldesk.grid(row = 6, column = 2)
+
         submit = tk.Button(bottomFrame,
                         # width = consts.BUTTON_WIDTH,
                         # height = consts.BUTTON_HEIGHT,
@@ -142,17 +166,15 @@ class UserInterface:
                         )
         submit.grid(row = 6, column = 3)
 
-        filldesk = tk.Button(bottomFrame,
-                        # width = consts.BUTTON_WIDTH,
-                        # height = consts.BUTTON_HEIGHT,
-                        text = "fill desk",
-                        justify="left",
-                        pady=0,
-                        anchor = 's',
-                        #padx=100, background="blue",
-                        command = self.controller.fillDeskLambda(self.deck,self),
-                        )
-        filldesk.grid(row = 6, column = 1)
+        string = self.controller.getCurrentGameLog(self.deck)
+        w = tk.Label(bottomFrame, text=string)
+        w.grid(row=6,column=4)
+
+
+        # p = 6*consts.DESK_CARDS_ONEROW+5
+        # pilImage = Image.open(self.deck.cardDict[0].getUrl())
+        # img = self.controller.resize(pilImage,1)
+        # self.makeLabel(p,bottomFrame,image=img,text=string)
         
     #set up submitted button
 
