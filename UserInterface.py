@@ -10,6 +10,7 @@ class UserInterface:
         self.window = tk.Tk()
         self.deskCardImages = []
         self.buttonList = []
+        #self.canvas = None
         self.topFrame,self.bodyFrame,self.bottomFrame = self.initWindowFrame(self.window)
         self.clock = None
 
@@ -29,11 +30,26 @@ class UserInterface:
 
     
     #initialize rootwindow basic attribute, length height and titile
-    def initWindow(self):
+    #photo = None
+    def initWindow(self):    
+        from PIL import ImageTk, Image
         length = consts.WINDOW_WIDTH
         height = consts.WINDOW_HEIGHT
+        # global photo
         self.window.title(consts.GAME_NAME)
         self.window.geometry("%dx%d" % (length,height))
+
+        # canvas = tk.Canvas(self.window, width=length,height=height,bd=0, highlightthickness=0)
+        # imgpath = consts.BACKGROUND_IMAGE_PATH
+        # img = Image.open(imgpath)
+        # img = self.controller.resize(img,2)
+        # photo = ImageTk.PhotoImage(img)
+ 
+        # canvas.create_image(400, 200, image=photo)
+        # canvas.pack()
+        # return canvas
+        
+
 
     #set up window outline(divide it into frames)
     def initWindowFrame(self,window):

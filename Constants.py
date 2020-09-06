@@ -5,6 +5,7 @@ IMAGE_PATH = "./CardImages/"
 IMAGE_FORMAT = ".gif"
 RESIZE_RATIO = 0.6
 CHOSEN_RESIZE_RATIO = 0.4
+BACKGROUND_IMAGE_PATH = './CardImages/background.gif'
 
 #DECK 
 COLOR_LIST = ['blue','green','red','yellow']
