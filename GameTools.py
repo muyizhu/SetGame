@@ -6,16 +6,20 @@ class GameValidator:
         pass
 
     def validateSet(self,chosenCards):
-        return False
+        return True
 
-    def validateView(self,deck):
+    def validateView(self,deck,ui):
         if(self.validateSet(deck.chosenCards)):
-            deck.deleteChosenCardsFromDesk()
+            positions = deck.deleteChosenCardsFromDesk()
+            for p in positions:
+                control = GameController()
+                img = control.resizeCardToNormal(deck.cardDict[0])
+                ui.makeLabel(p,ui.bodyFrame,img,text="empty")
         else:
             tkinter.messagebox.askokcancel("game mention", "chosen set is not right!!")
 
-    def validateLambda(self,deck):
-        return lambda: self.validateView(deck)
+    def validateLambda(self,deck,ui):
+        return lambda: self.validateView(deck,ui)
     
 
 class GameController:

@@ -10,19 +10,19 @@ class UserInterface:
         self.window = tk.Tk()
         self.deskCardImages = []
         self.buttonList = []
+        self.topFrame,self.bodyFrame,self.bottomFrame = self.initWindowFrame(self.window)
         self.clock = None
 
     #public function, used to start the gameUI
     def drawMain(self):
         self.initWindow()
         self.setMenuBar(self.window)
-        topFrame,bodyFrame,bottomFrame = self.initWindowFrame(self.window)
-        topFrame.pack()
-        bodyFrame.pack()
-        bottomFrame.pack()
-        self.setTopFrame(topFrame)
-        self.setGameBody(bodyFrame)
-        self.setControlButton(bottomFrame)
+        self.topFrame.pack()
+        self.bodyFrame.pack()
+        self.bottomFrame.pack()
+        self.setTopFrame(self.topFrame)
+        self.setGameBody(self.bodyFrame)
+        self.setControlButton(self.bottomFrame)
         self.window.protocol("WM_DELETE_WINDOW", self.controller.onClosingLambda(self.window,self.deck,self.clock) )
         self.window.mainloop()
 
@@ -87,9 +87,19 @@ class UserInterface:
 
     def clickCardLambda(self,i,j,deck,bodyFrame):
         return lambda: self.controller.clickCard(i,j,deck,self,bodyFrame)
+    
+    def makeLabel(self,p,bodyFrame,image,bg='grey',text='empty',fg='white',compound='center'):
+        row = p//consts.DESK_CARDS_ONEROW
+        col = p%consts.DESK_CARDS_ONEROW
+        label = tk.Label(bodyFrame,width = consts.BUTTON_WIDTH-5,
+                        height = consts.BUTTON_HEIGHT-5,image =image)
+        label.config(bg=bg,text=text,fg=fg, compound = compound)
+        label.grid(row=row,column=col)
 
     def makeButton(self,row,col,bodyFrame,bd=None,relief='raised',callback = clickCardLambda,thickness=consts.NORMAL_THICKNESS):
         key = row*consts.DESK_CARDS_ONEROW+col
+        if self.deskCardImages[key] == -1:
+            return
         button = tk.Button(bodyFrame,
                         width = consts.BUTTON_WIDTH,
                         height = consts.BUTTON_HEIGHT,
@@ -109,7 +119,7 @@ class UserInterface:
                         pady=0,
                         anchor = 's',
                         #padx=100, background="blue",
-                        command = self.validator.validateLambda(self.deck),
+                        command = self.validator.validateLambda(self.deck,self),
                         )
         button.grid(row = 6, column = 3)
         

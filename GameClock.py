@@ -1,6 +1,6 @@
 import time
 import tkinter as tk
-
+import Constants as consts
 
 
 
@@ -8,7 +8,7 @@ class Clock:
     def __init__(self,root,Frame):
         self.root = root
         self.label = tk.Label(Frame,text="")
-        self.label.pack()
+        self.label.grid(row = consts.CLOCK_ROW,column = consts.CLOCK_COL)
         self.time_start=time.time()
         self.playTime = 0
         self.update_clock()

@@ -42,20 +42,20 @@ class Deck:
         card = self.deskCards[index]
         result = -1
         if card in self.chosenCards:
-            print("length of chosen",len(self.chosenCards))
             return -1
         elif len(self.chosenCards)==3:
             first = self.chosenCards[0]
             self.chosenCards = self.chosenCards[1:]
-            for i in range(0,len(self.deskCards)):
-                if self.deskCards[i] == first:
-                    result = i
-                    break
+            result = self.findCardInDesk(first)
         self.chosenCards.append(card)
-        print("length of chosen",len(self.chosenCards))
         return result
 
-    
+    def findCardInDesk(self,card):
+        for i in range(0,len(self.deskCards)):
+            if self.deskCards[i]!=-1 and self.deskCards[i] == card:
+                return i
+        return -1
+
     # def chooseCardsFromDesk(self,IDs):
     #     pass
 
@@ -90,7 +90,7 @@ class Deck:
         for i in range(0,self.deskCapacity):
             if len(self.deskCards) <= self.deskCapacity:
                 self.deskCards.append(self.cardPool.pop())
-            elif self.deskCards[i] == None:
+            elif self.deskCards[i] == -1:
                 self.deskCards[i] = self.cardPool.pop()
 
     #put all cards on desk back to cardList
@@ -101,6 +101,7 @@ class Deck:
 
     #initialize the desk
     def readyForGame(self):
+        self.clearFinishCards()
         self.cancelAllChosen()
         self.clearDesk()
         self.shuffle()
@@ -111,6 +112,18 @@ class Deck:
         random.shuffle(self.cardPool)
         random.shuffle(self.cardPool)
         random.shuffle(self.cardPool)
+    
+    def clearFinishCards(self):
+        for card in self.finishCards:
+            self.cardPool.append(card)
+        self.finishCards = []
 
     def deleteChosenCardsFromDesk(self):
-        pass
+        uiposition = []
+        for card in self.chosenCards:
+            index = self.findCardInDesk(card)
+            self.deskCards[index] = -1
+            self.finishCards.append(index)
+            uiposition.append(index)
+        self.cancelAllChosen()
+        return uiposition

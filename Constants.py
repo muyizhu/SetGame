@@ -40,3 +40,7 @@ EASY = "easy"
 MIDDLE = "middle"
 HARD = "hard"
 DIFFICULTY = EASY
+
+#CLOCK
+CLOCK_ROW = 0
+CLOCK_COL = 0
