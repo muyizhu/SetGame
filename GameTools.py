@@ -99,5 +99,12 @@ class GameController:
         else:
             deskCardImages[index] = self.resizeCardToNormal(card)
     
+    def fillDeskLambda(self,deck,ui):
+        return lambda:self.fillDesk(deck,ui)
+
+    def fillDesk(self,deck,ui):
+        deck.fillDesk()
+        ui.setGameBody(ui.bodyFrame)
+    
     
         

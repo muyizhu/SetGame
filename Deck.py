@@ -85,13 +85,13 @@ class Deck:
         self.chosenCards = []
 
     #Fill the Desk with cards until its MAX capacity
-    def fillDesk(self,n):
+    def fillDesk(self):
         random.shuffle(self.cardPool)
         for i in range(0,self.deskCapacity):
-            if len(self.deskCards) <= self.deskCapacity:
-                self.deskCards.append(self.cardPool.pop())
-            elif self.deskCards[i] == -1:
+            if i<len(self.deskCards) and self.deskCards[i] == -1:
                 self.deskCards[i] = self.cardPool.pop()
+            elif i>=len(self.deskCards):
+                self.deskCards.append(self.cardPool.pop())
 
     #put all cards on desk back to cardList
     def clearDesk(self):
@@ -105,7 +105,7 @@ class Deck:
         self.cancelAllChosen()
         self.clearDesk()
         self.shuffle()
-        self.fillDesk(self.deskCapacity)
+        self.fillDesk()
 
     #shuffle method with three shuffles
     def shuffle(self):
@@ -127,3 +127,4 @@ class Deck:
             uiposition.append(index)
         self.cancelAllChosen()
         return uiposition
+    

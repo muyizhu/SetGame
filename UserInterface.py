@@ -71,7 +71,8 @@ class UserInterface:
         
 
     #-------------------------------------bodyFrame start here------------------------------------------------
-    def setGameBody(self,bodyFrame):  
+    def setGameBody(self,bodyFrame): 
+        self.deskCardImages = []
         self.controller.loadCardsImage(self.deck.deskCards,self.deskCardImages)
         self.showDesk(bodyFrame)
         # canvas.create_image(0,0, anchor='nw', image=img)
@@ -79,6 +80,7 @@ class UserInterface:
 
     
     def showDesk(self,bodyFrame):
+        import time
         index=0
         for i in range(0,consts.DESK_CARDS_ONECOL):
             for j in range(0,consts.DESK_CARDS_ONEROW):
@@ -99,6 +101,7 @@ class UserInterface:
     def makeButton(self,row,col,bodyFrame,bd=None,relief='raised',callback = clickCardLambda,thickness=consts.NORMAL_THICKNESS):
         key = row*consts.DESK_CARDS_ONEROW+col
         if self.deskCardImages[key] == -1:
+            print("asdfasjfkasjdflkjaldjflajdk")
             return
         button = tk.Button(bodyFrame,
                         width = consts.BUTTON_WIDTH,
@@ -111,7 +114,7 @@ class UserInterface:
         button.grid(row = row,column=col)
     #-------------------------------------bodyFrame End here--------------------------------------------------
     def setControlButton(self,bottomFrame):
-        button = tk.Button(bottomFrame,
+        submit = tk.Button(bottomFrame,
                         # width = consts.BUTTON_WIDTH,
                         # height = consts.BUTTON_HEIGHT,
                         text = "submit",
@@ -121,7 +124,19 @@ class UserInterface:
                         #padx=100, background="blue",
                         command = self.validator.validateLambda(self.deck,self),
                         )
-        button.grid(row = 6, column = 3)
+        submit.grid(row = 6, column = 3)
+
+        filldesk = tk.Button(bottomFrame,
+                        # width = consts.BUTTON_WIDTH,
+                        # height = consts.BUTTON_HEIGHT,
+                        text = "fill desk",
+                        justify="left",
+                        pady=0,
+                        anchor = 's',
+                        #padx=100, background="blue",
+                        command = self.controller.fillDeskLambda(self.deck,self),
+                        )
+        filldesk.grid(row = 6, column = 1)
         
     #set up submitted button
 
