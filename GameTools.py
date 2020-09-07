@@ -2,6 +2,7 @@ import Constants as consts
 from PIL import Image, ImageTk 
 import tkinter.messagebox
 import copy
+
 class GameValidator:
 
     def _init_(self):
@@ -25,14 +26,15 @@ class GameValidator:
                 for j in range(i + 1,consts.DESK_CARDS_CAPACITY - 1 ):
                     setDraft[1] = deck.deskCards[j]
                     for k in range(j + 1, consts.DESK_CARDS_CAPACITY):
-                        setDraft[2] = deck.deskCard[k]
+                        setDraft[2] = deck.deskCards[k]
                         print(setDraft)
                         if self.validateSet(setDraft):
-                            print(setDraft)
                             return True
             return False
+        elif (deck.getNumberOfCardsOndesk() == 0) and (len(deck.cardPool) == 0):
+                return False
         else:
-            if len(deck.cardDict) == 0:
+            if len(deck.cardPool) == 0:
                 if deck.getNumberOfCardsOndesk() == 0:
                     return False
                 else:
@@ -48,7 +50,6 @@ class GameValidator:
                                 setDraft[2] = deskCardsDraft[k]
                                 print(setDraft)
                                 if self.validateSet(setDraft):
-                                    print(setDraft)
                                     return True
                     return False
             else:
@@ -118,6 +119,7 @@ class GameController:
             container.append(img)
 
     def resizeCardToChosen(self,card):
+        print(card)
         pilImage = Image.open(card.getUrl())
         resize = self.resize(pilImage,consts.CHOSEN_RESIZE_RATIO)
         img = ImageTk.PhotoImage(resize)
@@ -164,6 +166,11 @@ class GameController:
     def fillDesk(self,deck,ui):
         deck.fillDesk()
         ui.setGameBody(ui.bodyFrame)
+        gamevalidator = GameValidator()
+        if (not gamevalidator.canGameContinue(deck)):
+            import time
+            tkinter.messagebox.askokcancel("Game report", "Exllent!! you find all set in " + str(
+                time.time() - ui.clock.time_start) + " seconds")
     
     def getCurrentGameLog(self,deck):
         return "you have finished "+str(len(deck.finishCards))+"cards. "+str(len(deck.cardDict)-len(deck.finishCards))+" cards left."
@@ -176,6 +183,3 @@ class GameController:
         ui.setTopFrame(ui.topFrame)
         ui.setGameBody(ui.bodyFrame)
         ui.setControlButton(ui.bottomFrame)
-    
-    
-        

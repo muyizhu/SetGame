@@ -28,6 +28,7 @@ class Deck:
                         self.cardDict.append(card)
                         num = num+1
                         index = index+1
+        self.cardDict = self.cardDict[:18]
 
     def getNumberOfCards(self):
         return len(self.cardDict)
