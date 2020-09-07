@@ -1,5 +1,6 @@
 import tkinter as tk
 import Constants as consts
+import GameClock
 
 class UserInterface:
     def __init__(self,deck,validator,controller):
@@ -9,25 +10,45 @@ class UserInterface:
         self.window = tk.Tk()
         self.deskCardImages = []
         self.buttonList = []
+        #self.canvas = None
+        self.topFrame,self.bodyFrame,self.bottomFrame = self.initWindowFrame(self.window)
+        self.clock = None
 
     #public function, used to start the gameUI
     def drawMain(self):
         self.initWindow()
         self.setMenuBar(self.window)
-        topFrame,bodyFrame,bottomFrame = self.initWindowFrame(self.window)
-        topFrame.pack()
-        bodyFrame.pack()
-        bottomFrame.pack()
-        self.setGameBody(bodyFrame)
-        self.setControlButton(bottomFrame)
+        self.topFrame.pack()
+        self.bodyFrame.pack()
+        self.bottomFrame.pack()
+        self.setTopFrame(self.topFrame)
+        self.setGameBody(self.bodyFrame)
+        self.setControlButton(self.bottomFrame)
         self.window.mainloop()
+
+
     
     #initialize rootwindow basic attribute, length height and titile
-    def initWindow(self):
+    #photo = None
+    def initWindow(self):    
+        from PIL import ImageTk, Image
         length = consts.WINDOW_WIDTH
         height = consts.WINDOW_HEIGHT
+        # global photo
         self.window.title(consts.GAME_NAME)
         self.window.geometry("%dx%d" % (length,height))
+
+        # canvas = tk.Canvas(self.window, width=length,height=height,bd=0, highlightthickness=0)
+        # imgpath = consts.BACKGROUND_IMAGE_PATH
+        # img = Image.open(imgpath)
+        # img = self.controller.resize(img,2)
+        # photo = ImageTk.PhotoImage(img)
+ 
+        # canvas.create_image(400, 200, image=photo)
+        # canvas.pack()
+        # return canvas
+        
+
 
     #set up window outline(divide it into frames)
     def initWindowFrame(self,window):
@@ -56,33 +77,105 @@ class UserInterface:
         difficultyMenu.add_command(label="hard",command=self.controller.changeGameDifficulty(consts.HARD,self.deck))
     #-------------------------------------MenuBar End here-----------------------------------------------------
 
+    #----------------------------------Set up TopFrame here---------------------------------------------------  
+    def setTopFrame(self,topFrame):
+        self.setClock(topFrame)
+        self.setRestartButton(topFrame)
+
+    def setClock(self,topFrame):
+        self.clock = GameClock.Clock(self.window,topFrame)
+        self.window.protocol("WM_DELETE_WINDOW", self.controller.onClosingLambda(self.window,self.deck,self.clock) )
+    
+    def setRestartButton(self,topFrame):
+        restart = tk.Button(topFrame,
+                        # width = consts.BUTTON_WIDTH,
+                        # height = consts.BUTTON_HEIGHT,
+                        text = "restart game",
+                        justify="center",
+                        pady=0,
+                        anchor = 's',
+                        #padx=100, background="blue",
+                        command = self.controller.restartLambda(self.deck,self)
+                        )
+        restart.grid(row = consts.RESTART_ROW, column=consts.RESTART_COL)
 
     #-------------------------------------bodyFrame start here------------------------------------------------
-    def setGameBody(self,bodyFrame):  
+    def setGameBody(self,bodyFrame): 
+        self.deskCardImages = []
         self.controller.loadCardsImage(self.deck.deskCards,self.deskCardImages)
         self.showDesk(bodyFrame)
         # canvas.create_image(0,0, anchor='nw', image=img)
         # canvas.pack()
 
+    
     def showDesk(self,bodyFrame):
-        index = 0
-        buttonList = []
+        import time
+        index=0
         for i in range(0,consts.DESK_CARDS_ONECOL):
-            rowList = []
             for j in range(0,consts.DESK_CARDS_ONEROW):
-                button = tk.Button(bodyFrame,
-                                image = self.deskCardImages[index],
-                                command = lambda: self.controller.chooseCard(i,j,self.deck,button) )
-                button.grid(row = i,column=j)
-                rowList.append(button)
+                self.makeButton(i,j,bodyFrame)
                 index+=1
-            buttonList.append(rowList)
 
+    def clickCardLambda(self,i,j,deck,bodyFrame):
+        return lambda: self.controller.clickCard(i,j,deck,self,bodyFrame)
+    
+    def makeLabel(self,p,bodyFrame,image,bg='grey',text='empty',fg='white',compound='center'):
+        row = p//consts.DESK_CARDS_ONEROW
+        col = p%consts.DESK_CARDS_ONEROW
+        label = tk.Label(bodyFrame,width = consts.BUTTON_WIDTH-5,
+                        height = consts.BUTTON_HEIGHT-5,image =image)
+        label.config(bg=bg,text=text,fg=fg, compound = compound)
+        label.grid(row=row,column=col)
+
+    def makeButton(self,row,col,bodyFrame,bd=None,relief='raised',callback = clickCardLambda,thickness=consts.NORMAL_THICKNESS):
+        key = row*consts.DESK_CARDS_ONEROW+col
+        if self.deskCardImages[key] == -1:
+            return
+        button = tk.Button(bodyFrame,
+                        width = consts.BUTTON_WIDTH,
+                        height = consts.BUTTON_HEIGHT,
+                        image = self.deskCardImages[key],
+                        relief = relief,
+                        command = callback(self,row,col,self.deck,bodyFrame),
+                        borderwidth=bd)
+        button.config(highlightthickness=thickness)
+        button.grid(row = row,column=col)
     #-------------------------------------bodyFrame End here--------------------------------------------------
+    def setControlButton(self,bottomFrame):
+        filldesk = tk.Button(bottomFrame,
+                        # width = consts.BUTTON_WIDTH,
+                        # height = consts.BUTTON_HEIGHT,
+                        text = "fill desk",
+                        justify="left",
+                        pady=0,
+                        anchor = 's',
+                        #padx=100, background="blue",
+                        command = self.controller.fillDeskLambda(self.deck,self),
+                        )
+        filldesk.grid(row = 6, column = 2)
+
+        submit = tk.Button(bottomFrame,
+                        # width = consts.BUTTON_WIDTH,
+                        # height = consts.BUTTON_HEIGHT,
+                        text = "submit",
+                        justify="center",
+                        pady=0,
+                        anchor = 's',
+                        #padx=100, background="blue",
+                        command = self.validator.validateLambda(self.deck,self),
+                        )
+        submit.grid(row = 6, column = 3)
+
+        string = self.controller.getCurrentGameLog(self.deck)
+        w = tk.Label(bottomFrame, text=string)
+        w.grid(row=6,column=4)
 
 
-    def setControlButton(self,frameBottom):
-        pass
+        # p = 6*consts.DESK_CARDS_ONEROW+5
+        # pilImage = Image.open(self.deck.cardDict[0].getUrl())
+        # img = self.controller.resize(pilImage,1)
+        # self.makeLabel(p,bottomFrame,image=img,text=string)
+        
     #set up submitted button
 
     #set up memu
