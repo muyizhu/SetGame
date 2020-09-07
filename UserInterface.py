@@ -122,8 +122,8 @@ class UserInterface:
     def makeLabel(self,p,bodyFrame,image,bg='grey',text='empty',fg='white',compound='center'):
         row = p//consts.DESK_CARDS_ONEROW
         col = p%consts.DESK_CARDS_ONEROW
-        label = tk.Label(bodyFrame,width = consts.BUTTON_WIDTH-5,
-                        height = consts.BUTTON_HEIGHT-5,image =image)
+        label = tk.Label(bodyFrame,width = consts.BUTTON_WIDTH,
+                        height = consts.BUTTON_HEIGHT,padx=0,pady=0,image =image,relief="ridge",)
         label.config(bg=bg,text=text,fg=fg, compound = compound)
         label.grid(row=row,column=col)
 

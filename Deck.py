@@ -76,7 +76,7 @@ class Deck:
             return
         for i in range(0,len(self.chosenCards)):
             if self.chosenCards[i] == card:
-                self.chosenCards = self.chosenCards[0:i-1]+self.chosenCards[i+1:]
+                self.chosenCards = self.chosenCards[0:i]+self.chosenCards[i+1:]
                 return
 
     #cancel all the chosen cards'chosen statue, clear chosenList and put all cards in it back to cardList

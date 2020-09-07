@@ -6,12 +6,54 @@ class GameValidator:
         pass
 
     def validateSet(self,chosenCards):
+        Colors = set([str(card.getColor()) for card in chosenCards])
+        Fills = set([card.getFill() for card in chosenCards])
+        Shapes = set([card.getShape() for card in chosenCards])
+        Numbers = set([card.getNumber() for card in chosenCards])
+        if (len(Colors) == 3 or len(Colors) == 1) and (len(Fills) == 3 or len(Fills) == 1) and (len(Shapes) == 3 or len(Shapes) == 1) and ((len(Numbers) == 3 or len(Numbers) == 1)):
+            return True
+        else:
+            return False
         return True
     
     def canGameContinue(self,deck):
-        if len(deck.finishCards) >10:
-            return False
-        return True
+        return False
+        # import copy
+        # if deck.getNumberOfCardsOndesk() == consts.DESK_CARDS_CAPACITY:
+        #     for i in range(0, consts.DESK_CARDS_CAPACITY - 2):
+        #         setDraft = [-1, -1, -1]
+        #         setDraft[0] = deck.deskCards[i]
+        #         for j in range(i + 1,consts.DESK_CARDS_CAPACITY - 1 ):
+        #             setDraft[1] = deck.deskCards[j]
+        #             for k in range(j + 1, consts.DESK_CARDS_CAPACITY):
+        #                 setDraft[2] = deck.deskCards[k]
+        #                 print(setDraft)
+        #                 if self.validateSet(setDraft):
+        #                     return True
+        #     return False
+        # elif (deck.getNumberOfCardsOndesk() == 0) and (len(deck.cardPool) == 0):
+        #         return False
+        # else:
+        #     if len(deck.cardPool) == 0:
+        #         if deck.getNumberOfCardsOndesk() == 0:
+        #             return False
+        #         else:
+        #             deskCardsDraft = copy.deepcopy(deck.deskCards)
+        #             for i in range(0, deskCardsDraft.count(-1)):
+        #                 deskCardsDraft.remove(-1)
+        #             for i in range(0, len(deskCardsDraft) - 2):
+        #                 setDraft = [-1, -1, -1]
+        #                 setDraft[0] = deskCardsDraft[i]
+        #                 for j in range(i + 1, len(deskCardsDraft) - 1):
+        #                     setDraft[1] = deskCardsDraft[j]
+        #                     for k in range(j + 1, len(deskCardsDraft)):
+        #                         setDraft[2] = deskCardsDraft[k]
+        #                         print(setDraft)
+        #                         if self.validateSet(setDraft):
+        #                             return True
+        #             return False
+        #     else:
+        #         return True
         
 
     def validateView(self,deck,ui):
@@ -19,7 +61,7 @@ class GameValidator:
             positions = deck.deleteChosenCardsFromDesk()
             for p in positions:
                 control = GameController()
-                img = control.resizeCardToNormal(deck.cardDict[0])
+                img = control.get_resize_image_from_url(consts.EMPTY_IMAGE_PATH)
                 ui.makeLabel(p,ui.bodyFrame,img,text="empty")
             self.updateMessage(deck,ui)
             if (not self.canGameContinue(deck)):
@@ -71,6 +113,12 @@ class GameController:
         height = int(h*ratio)  
         return pil_image.resize((width, height),Image.ANTIALIAS) 
     
+    def get_resize_image_from_url(self,url):
+        pilImage = Image.open(url)
+        resize = self.resize(pilImage,consts.RESIZE_RATIO)
+        img = ImageTk.PhotoImage(resize)
+        return img
+    
     def loadCardsImage(self,cards,container):
         for card in cards:
             img = self.resizeCardToNormal(card)
@@ -97,7 +145,7 @@ class GameController:
         thick = consts.NORMAL_THICKNESS
         if card not in deck.chosenCards:
             needToBack = deck.chooseCardFromDesk(key)
-            relief = "ridge"
+            relief = "sunken"
             thick = consts.CHOSEN_THICKNESS
         else:
             deck.cancelChosen(card)
