@@ -10,8 +10,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="550d6b7f-c5b7-4c06-82d0-e9c0a6ad3cfe" name="Default Changelist" comment="create desk obkject">
+    <list default="true" id="550d6b7f-c5b7-4c06-82d0-e9c0a6ad3cfe" name="Default Changelist" comment="validateSet complete">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Deck.py" beforeDir="false" afterPath="$PROJECT_DIR$/Deck.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Desk.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/GameTools.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameTools.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -58,7 +60,18 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../SetAssignment-master" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="PyConsoleConfigurable.Python Console" />
+  </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings module-name="SETgame" is-module-sdk="true" working-directory="$PROJECT_DIR$">
+        <option name="myUseModuleSdk" value="true" />
+        <option name="myModuleName" value="SETgame" />
+        <option name="myWorkingDirectory" value="$PROJECT_DIR$" />
+      </console-settings>
+    </option>
+    <option name="myUseExistingConsole" value="true" />
   </component>
   <component name="RunManager">
     <configuration name="SETGAME" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -120,7 +133,14 @@
       <option name="project" value="LOCAL" />
       <updated>1599331227064</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="validateSet complete">
+      <created>1599505658029</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1599505658029</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -138,29 +158,30 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Create Desk.py" />
     <MESSAGE value="create desk obkject" />
-    <option name="LAST_COMMIT_MESSAGE" value="create desk obkject" />
+    <MESSAGE value="validateSet complete" />
+    <option name="LAST_COMMIT_MESSAGE" value="validateSet complete" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1599330676211">
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1599509725908">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1599330676211" />
-    <state width="1899" height="282" key="GridCell.Tab.0.bottom" timestamp="1599500163094">
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1599509725908" />
+    <state width="1899" height="282" key="GridCell.Tab.0.bottom" timestamp="1599511800366">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1599500163094" />
-    <state width="1899" height="282" key="GridCell.Tab.0.center" timestamp="1599500163094">
+    <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1599511800366" />
+    <state width="1899" height="282" key="GridCell.Tab.0.center" timestamp="1599511800366">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1599500163094" />
-    <state width="1899" height="282" key="GridCell.Tab.0.left" timestamp="1599500163094">
+    <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1599511800366" />
+    <state width="1899" height="282" key="GridCell.Tab.0.left" timestamp="1599511800366">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1599500163094" />
-    <state width="1899" height="282" key="GridCell.Tab.0.right" timestamp="1599500163094">
+    <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1599511800365" />
+    <state width="1899" height="282" key="GridCell.Tab.0.right" timestamp="1599511800366">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1599500163094" />
+    <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1599511800366" />
     <state x="343" y="86" key="MergeDialog" timestamp="1599499068087">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -169,10 +190,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="845" y="386" width="547" height="267" key="MultipleFileMergeDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1599499068094" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1599331231101">
+    <state x="461" y="164" key="SettingsEditor" timestamp="1599509727368">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1599331231101" />
+    <state x="461" y="164" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1599509727368" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1599505659702">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1599505659702" />
     <state x="753" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1599289257480">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

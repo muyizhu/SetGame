@@ -128,4 +128,10 @@ class Deck:
             uiposition.append(index)
         self.cancelAllChosen()
         return uiposition
-    
+
+    def getNumberOfCardsOndesk(self):
+        count = 0
+        for card in self.deskCards:
+           if card != -1:
+               count += 1
+        return count

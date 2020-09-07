@@ -1,6 +1,7 @@
 import Constants as consts
 from PIL import Image, ImageTk 
 import tkinter.messagebox
+import copy
 class GameValidator:
 
     def _init_(self):
@@ -15,11 +16,43 @@ class GameValidator:
             return True
         else:
             return False
-    
+
     def canGameContinue(self,deck):
-        if len(deck.finishCards) >10:
+        if deck.getNumberOfCardsOndesk() == consts.DESK_CARDS_CAPACITY:
+            for i in range(0, consts.DESK_CARDS_CAPACITY - 2):
+                setDraft = [-1, -1, -1]
+                setDraft[0] = deck.deskCards[i]
+                for j in range(i + 1,consts.DESK_CARDS_CAPACITY - 1 ):
+                    setDraft[1] = deck.deskCards[j]
+                    for k in range(j + 1, consts.DESK_CARDS_CAPACITY):
+                        setDraft[2] = deck.deskCard[k]
+                        print(setDraft)
+                        if self.validateSet(setDraft):
+                            print(setDraft)
+                            return True
             return False
-        return True
+        else:
+            if len(deck.cardDict) == 0:
+                if deck.getNumberOfCardsOndesk() == 0:
+                    return False
+                else:
+                    deskCardsDraft = copy.deepcopy(deck.deskCards)
+                    for i in range(0, deskCardsDraft.count(-1)):
+                        deskCardsDraft.remove(-1)
+                    for i in range(0, len(deskCardsDraft) - 2):
+                        setDraft = [-1, -1, -1]
+                        setDraft[0] = deskCardsDraft[i]
+                        for j in range(i + 1, len(deskCardsDraft) - 1):
+                            setDraft[1] = deskCardsDraft[j]
+                            for k in range(j + 1, len(deskCardsDraft)):
+                                setDraft[2] = deskCardsDraft[k]
+                                print(setDraft)
+                                if self.validateSet(setDraft):
+                                    print(setDraft)
+                                    return True
+                    return False
+            else:
+                return True
         
 
     def validateView(self,deck,ui):
