@@ -10,15 +10,19 @@ class GameValidator:
         pass
 
     def validateSet(self, chosenCards):
-         Colors = set([str(card.getColor()) for card in chosenCards])
-         Fills = set([card.getFill() for card in chosenCards])
-         Shapes = set([card.getShape() for card in chosenCards])
-         Numbers = set([card.getNumber() for card in chosenCards])
-         if (len(Colors) == 3 or len(Colors) == 1) and (len(Fills) == 3 or len(Fills) == 1) and (
-                 len(Shapes) == 3 or len(Shapes) == 1) and ((len(Numbers) == 3 or len(Numbers) == 1)) and len(chosenCards) == 3:
-             return True
-         else:
-             return False
+        if len(chosenCards) == 3:
+            return True
+        else:
+            return False
+         # Colors = set([str(card.getColor()) for card in chosenCards])
+         # Fills = set([card.getFill() for card in chosenCards])
+         # Shapes = set([card.getShape() for card in chosenCards])
+         # Numbers = set([card.getNumber() for card in chosenCards])
+         # if (len(Colors) == 3 or len(Colors) == 1) and (len(Fills) == 3 or len(Fills) == 1) and (
+         #         len(Shapes) == 3 or len(Shapes) == 1) and ((len(Numbers) == 3 or len(Numbers) == 1)) and len(chosenCards) == 3:
+         #     return True
+         # else:
+         #     return False
 
     def canGameContinue(self, platform):
         if platform.getNumberOfCardsOnDesk() == consts.DESK_CARDS_CAPACITY:
@@ -164,7 +168,7 @@ class GameController:
         else:
             platform.cancelChosen(card)
             relief = "raised"
-        if needToBack != -1 and card != -1:
+        if needToBack != -1:
             self.changeChosenCardImage(platform, ui.deskCardImages, needToBack)
             row = needToBack // consts.DESK_CARDS_ONEROW
             col = needToBack % consts.DESK_CARDS_ONEROW
@@ -173,7 +177,8 @@ class GameController:
             self.changeChosenCardImage(platform, ui.deskCardImages, key)
             ui.makeButton(i, j, bodyFrame, relief=relief, thickness=thick)
         else:
-            pass
+            img = self.resizeCardToNormal(-1)
+            ui.makeLabel(key, ui.bodyFrame, img, text="empty")
 
 
     def changeChosenCardImage(self, platform, deskCardImages, index):
