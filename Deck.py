@@ -20,17 +20,9 @@ class Deck:
         index = 0
         num = 0
         for color in self.colorList:
-            if index == 60:
-                            break
             for fill in self.fillList:
-                if index == 60:
-                            break
                 for shape in self.shapeList:
-                    if index == 60:
-                            break
                     for number in self.numList:
-                        if index == 60:
-                            break
                         cardUrl = consts.IMAGE_PATH+color+" "+fill+" "+shape+str(num%3+1)+consts.IMAGE_FORMAT
                         card = Card(index,color, fill, shape, number,cardUrl)
                         self.cardDict.append(card)
@@ -57,11 +49,36 @@ class Deck:
         self.chosenCards.append(card)
         return result
 
+    def changeDeskCards(self,keys):
+        if len(self.cardPool)==0:
+            return []
+        desk = []
+        replace = []
+        for key in keys:
+            desk.append(self.deskCards[key])
+            if len(self.cardPool) > 0:
+                self.deskCards[key] = self.cardPool.pop()
+                replace.append(key)
+            else:
+                desk.pop()
+                break
+        for card in desk:
+            self.cardPool.append(card)
+        return replace
+
     def findCardInDesk(self,card):
         for i in range(0,len(self.deskCards)):
             if self.deskCards[i]!=-1 and self.deskCards[i] == card:
                 return i
         return -1
+    
+    def findKeysOfDeskCards(self):
+        keys = []
+        for i in range(0,len(self.deskCards)):
+            card = self.deskCards[i]
+            if card!=-1:
+                keys.append(i)
+        return keys
 
     # def chooseCardsFromDesk(self,IDs):
     #     pass
@@ -102,14 +119,17 @@ class Deck:
                 self.deskCards[i] = self.cardPool.pop()
                 filled.append(i)
             elif i>=len(self.deskCards):
-                self.deskCards.append(self.cardPool.pop())
                 filled.append(len(self.deskCards))
+                self.deskCards.append(self.cardPool.pop())
         return filled
+    
+    
 
     #put all cards on desk back to cardList
     def clearDesk(self):
         for card in self.deskCards:
-            self.cardPool.append(card)
+            if card != -1:
+                self.cardPool.append(card)
         self.deskCards = []
 
     #initialize the desk

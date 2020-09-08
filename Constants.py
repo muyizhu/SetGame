@@ -51,3 +51,7 @@ CLOCK_COL = 4
 #restart button
 RESTART_ROW = 0
 RESTART_COL = 0
+
+#message
+MESSAGE_ROW = 6
+MESSAGE_COL = 3

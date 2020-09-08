@@ -26,7 +26,6 @@ class GameValidator:
                     setDraft[1] = deck.deskCards[j]
                     for k in range(j + 1, consts.DESK_CARDS_CAPACITY):
                         setDraft[2] = deck.deskCards[k]
-                        print(setDraft)
                         if self.validateSet(setDraft):
                             return True
             return False
@@ -61,6 +60,7 @@ class GameValidator:
             for p in positions:
                 control = GameController()
                 img = control.get_resize_image_from_url(consts.EMPTY_IMAGE_PATH)
+                ui.deskCardImages[p] = -1
                 ui.makeLabel(p,ui.bodyFrame,img,text="empty")
             self.updateMessage(deck,ui)
             if (not self.canGameContinue(deck)):
@@ -79,7 +79,7 @@ class GameValidator:
         import tkinter
         string = self.getCurrentGameLog(deck)
         w = tkinter.Label(ui.bottomFrame, text=string)
-        w.grid(row=6,column=4)
+        w.grid(row=consts.MESSAGE_ROW,column=consts.MESSAGE_COL)
 
 class GameController:
     #Control methods for options in menubar
@@ -119,9 +119,14 @@ class GameController:
         return img
     
     def loadCardsImage(self,cards,container):
-        for card in cards:
+        for i in range(0,len(cards)):
+            card = cards[i]
             img = self.resizeCardToNormal(card)
-            container.append(img)
+            if i == len(container):
+                container.append(img)
+            else:
+                container.insert(i,img)
+            
 
     def resizeCardToChosen(self,card):
         if card == -1:
@@ -187,6 +192,18 @@ class GameController:
         ui.setTopFrame(ui.topFrame)
         ui.setGameBody(ui.bodyFrame)
         ui.setControlButton(ui.bottomFrame)
+    
+    def replaceAllCardsLambda(self,deck,ui):
+        return lambda: self.replaceAllCards(deck,ui)
+
+    def replaceAllCards(self,deck,ui):
+        keys = deck.findKeysOfDeskCards()
+        replace = deck.changeDeskCards(keys)
+        # ui.deskCardImages=[]
+        # deck.clearDesk()
+        if len(replace)!=0:
+            self.loadCardsImage(ui.deck.deskCards,ui.deskCardImages)
+            ui.showCards(replace,ui.bodyFrame)
     
     
         

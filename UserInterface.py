@@ -148,6 +148,18 @@ class UserInterface:
         button.grid(row = row,column=col)
     #-------------------------------------bodyFrame End here--------------------------------------------------
     def setControlButton(self,bottomFrame):
+        replaceAll = tk.Button(bottomFrame,
+                        # width = consts.BUTTON_WIDTH,
+                        # height = consts.BUTTON_HEIGHT,
+                        text = "Replace Cards",
+                        justify="left",
+                        pady=0,
+                        anchor = 's',
+                        #padx=100, background="blue",
+                        command = self.controller.replaceAllCardsLambda(self.deck,self),
+                        )
+        replaceAll.grid(row = 6, column = 0)
+
         filldesk = tk.Button(bottomFrame,
                         # width = consts.BUTTON_WIDTH,
                         # height = consts.BUTTON_HEIGHT,
@@ -158,7 +170,7 @@ class UserInterface:
                         #padx=100, background="blue",
                         command = self.controller.fillDeskLambda(self.deck,self),
                         )
-        filldesk.grid(row = 6, column = 2)
+        filldesk.grid(row = 6, column = 1)
 
         submit = tk.Button(bottomFrame,
                         # width = consts.BUTTON_WIDTH,
@@ -170,11 +182,11 @@ class UserInterface:
                         #padx=100, background="blue",
                         command = self.validator.validateLambda(self.deck,self),
                         )
-        submit.grid(row = 6, column = 3)
+        submit.grid(row = 6, column = 2)
 
         string = self.controller.getCurrentGameLog(self.deck)
         w = tk.Label(bottomFrame, text=string)
-        w.grid(row=6,column=4)
+        w.grid(row=consts.MESSAGE_ROW,column=consts.MESSAGE_COL)
 
 
         # p = 6*consts.DESK_CARDS_ONEROW+5
