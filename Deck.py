@@ -56,6 +56,7 @@ class Deck:
         replace = []
         for key in keys:
             desk.append(self.deskCards[key])
+            self.cancelChosen(self.deskCards[key])
             if len(self.cardPool) > 0:
                 self.deskCards[key] = self.cardPool.pop()
                 replace.append(key)
@@ -92,6 +93,8 @@ class Deck:
 
     #cancel the chosen statue of one card, given index of the card in chosenList
     def cancelChosen(self, card):
+        if len(self.chosenCards)==0:
+            return
         if self.chosenCards[0]==card:
             self.chosenCards = self.chosenCards[1:]
             return

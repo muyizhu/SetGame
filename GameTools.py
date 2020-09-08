@@ -215,6 +215,7 @@ class GameController:
             return
         key = positionandui[0]
         temp = deck.deskCards[key]
+        deck.cancelChosen(temp)
         deck.shuffle()
         card = deck.cardPool.pop()
         deck.deskCards[key] = card
