@@ -1,4 +1,3 @@
-# Sources
 #CardImages path
 
 IMAGE_PATH = "./CardImages/"
@@ -8,11 +7,12 @@ RESIZE_RATIO = 0.6
 CHOSEN_RESIZE_RATIO = 0.4
 BACKGROUND_IMAGE_PATH = './CardImages/background.gif'
 
-#DECK 
+#DECK
 COLOR_LIST = ['blue','green','red','yellow']
 FILL_LIST = ['clear','shaded','solid' ]
 SHAPE_LIST = ['circle','square', 'triangle']
 NUM_LIST = ['1','2','3']
+EMPTY_IMAGE = './CardImages/empty.png'
 
 #UI
 WINDOW_WIDTH = 800
@@ -24,7 +24,7 @@ DESK_WIDTH = 400
 DESK_HEIGHT = 300
 
 DESK_CARDS_ONEROW = 6
-DESK_CARDS_ONECOL = 1
+DESK_CARDS_ONECOL = 5
 DESK_CARDS_CAPACITY = DESK_CARDS_ONEROW*DESK_CARDS_ONECOL
 
 #BUTTON

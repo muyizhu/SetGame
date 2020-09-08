@@ -1,13 +1,11 @@
 class Card:
 
-    def __init__(self, ID, Color, Shape, Fill, Number,url):
-        self.beChosen = False
-        self.id = ID
+    def __init__(self, Color, Shape, Fill, Number):
         self.color = Color
         self.fill = Fill
         self.shape = Shape
         self.number = Number
-        self.url = url
+        self.image = "./CardImages/"+self.color+" "+self.fill+" "+self.shape+self.number+".gif"
 
     #create the methods for getting the properties of the card
     def getColor(self):
@@ -23,16 +21,7 @@ class Card:
         return self.number
 
     def getAll(self):
-        return (self.id,self.color, self.fill,self.shape,self.number,self.url)
+        return (self.color, self.fill,self.shape,self.number)
 
-    def getUrl(self):
-        return self.url
-
-    def getID(self):
-        return self.id
-
-    def chooseCard(self):
-        self.beChosen = True
-
-    def cancelChooseCard(self):
-        self.beChosen = False
+    def getImage(self):
+        return self.image

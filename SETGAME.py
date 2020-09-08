@@ -1,19 +1,22 @@
 import Deck
-import Card
-import UserInterface as UI
-import GameTools
+import Platform
+import UI
+import CoreSystem
+
+
 class SETGAME:
     def __init__(self):
         self.deck = Deck.Deck()
-        self.validator = GameTools.GameValidator()
-        self.GameController = GameTools.GameController()
-        self.ui = UI.UserInterface(self.deck,self.validator,self.GameController)
-    
+        self.platfrom = Platform.Platfrom(self.deck)
+        self.validator = CoreSystem.GameValidator()
+        self.GameController = CoreSystem.GameController()
+        self.ui = UI.UserInterface(self.platfrom, self.validator, self.GameController)
+
     def start(self):
-        self.deck.readyForGame()
+        self.platfrom.readForGame()
         self.ui.drawMain()
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     setGame = SETGAME()
     setGame.start()
-    
