@@ -17,7 +17,7 @@ class GameValidator:
         return True
     
     def canGameContinue(self,deck):
-        return False
+        return True
         # import copy
         # if deck.getNumberOfCardsOndesk() == consts.DESK_CARDS_CAPACITY:
         #     for i in range(0, consts.DESK_CARDS_CAPACITY - 2):
