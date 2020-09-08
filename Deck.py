@@ -83,9 +83,8 @@ class Deck:
     # def chooseCardsFromDesk(self,IDs):
     #     pass
 
-    #randomly choose a card from deskCards, put its index into chosenCards
-    def chooseCardFromDeskRandom(self):
-        pass
+    
+
 
     
     def chooseCardsFromDeskRandom(self):

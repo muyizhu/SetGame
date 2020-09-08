@@ -144,8 +144,10 @@ class UserInterface:
                         relief = relief,
                         command = callback(self,row,col,self.deck,bodyFrame),
                         borderwidth=bd)
+        button.bind("<Button-3>",self.controller.replaceCardLambda((key,self))  )
         button.config(highlightthickness=thickness)
         button.grid(row = row,column=col)
+    
     #-------------------------------------bodyFrame End here--------------------------------------------------
     def setControlButton(self,bottomFrame):
         replaceAll = tk.Button(bottomFrame,

@@ -205,5 +205,24 @@ class GameController:
             self.loadCardsImage(ui.deck.deskCards,ui.deskCardImages)
             ui.showCards(replace,ui.bodyFrame)
     
+    def replaceCardLambda(self,pui):
+        return  lambda event,p=pui: self.replaceCard(event,p)
+    
+    def replaceCard(self,event, positionandui):
+        ui = positionandui[1]
+        deck = ui.deck
+        if len(ui.deck.cardPool)==0:
+            return
+        key = positionandui[0]
+        temp = deck.deskCards[key]
+        deck.shuffle()
+        card = deck.cardPool.pop()
+        deck.deskCards[key] = card
+        deck.cardPool.append(temp)
+        ui.deskCardImages[key] = self.get_resize_image_from_url(card.url)
+        filled = [key]
+        ui.showCards(filled,ui.bodyFrame)
+        
+    
     
         
