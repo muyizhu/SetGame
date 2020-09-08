@@ -106,10 +106,14 @@ class UserInterface:
         self.showDesk(bodyFrame)
         # canvas.create_image(0,0, anchor='nw', image=img)
         # canvas.pack()
-
+    
+    def showCards(self,filled,frame):
+        for key in filled:
+            row = key//consts.DESK_CARDS_ONEROW
+            col = key%consts.DESK_CARDS_ONEROW
+            self.makeButton(row,col,frame)
     
     def showDesk(self,bodyFrame):
-        import time
         index=0
         for i in range(0,consts.DESK_CARDS_ONECOL):
             for j in range(0,consts.DESK_CARDS_ONEROW):
@@ -129,7 +133,9 @@ class UserInterface:
 
     def makeButton(self,row,col,bodyFrame,bd=None,relief='raised',callback = clickCardLambda,thickness=consts.NORMAL_THICKNESS):
         key = row*consts.DESK_CARDS_ONEROW+col
-        if self.deskCardImages[key] == -1:
+        if self.deskCardImages[key] == None:
+            img = self.controller.get_resize_image_from_url(consts.EMPTY_IMAGE_PATH)
+            self.makeLabel(key,bodyFrame,img,text="empty")
             return
         button = tk.Button(bodyFrame,
                         width = consts.BUTTON_WIDTH,

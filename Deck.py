@@ -20,9 +20,17 @@ class Deck:
         index = 0
         num = 0
         for color in self.colorList:
+            if index == 60:
+                            break
             for fill in self.fillList:
+                if index == 60:
+                            break
                 for shape in self.shapeList:
+                    if index == 60:
+                            break
                     for number in self.numList:
+                        if index == 60:
+                            break
                         cardUrl = consts.IMAGE_PATH+color+" "+fill+" "+shape+str(num%3+1)+consts.IMAGE_FORMAT
                         card = Card(index,color, fill, shape, number,cardUrl)
                         self.cardDict.append(card)
@@ -85,14 +93,18 @@ class Deck:
 
     #Fill the Desk with cards until its MAX capacity
     def fillDesk(self):
+        filled = []
         random.shuffle(self.cardPool)
         for i in range(0,self.deskCapacity):
             if len(self.cardPool) == 0:
-                return
+                return filled
             if i<len(self.deskCards) and self.deskCards[i] == -1:
                 self.deskCards[i] = self.cardPool.pop()
+                filled.append(i)
             elif i>=len(self.deskCards):
                 self.deskCards.append(self.cardPool.pop())
+                filled.append(len(self.deskCards))
+        return filled
 
     #put all cards on desk back to cardList
     def clearDesk(self):
@@ -128,4 +140,11 @@ class Deck:
             uiposition.append(index)
         self.cancelAllChosen()
         return uiposition
+    
+    def getNumberOfCardsOndesk(self):
+        count = 0
+        for card in self.deskCards:
+           if card != -1:
+               count += 1
+        return count
     

@@ -6,54 +6,53 @@ class GameValidator:
         pass
 
     def validateSet(self,chosenCards):
-        Colors = set([str(card.getColor()) for card in chosenCards])
-        Fills = set([card.getFill() for card in chosenCards])
-        Shapes = set([card.getShape() for card in chosenCards])
-        Numbers = set([card.getNumber() for card in chosenCards])
-        if (len(Colors) == 3 or len(Colors) == 1) and (len(Fills) == 3 or len(Fills) == 1) and (len(Shapes) == 3 or len(Shapes) == 1) and ((len(Numbers) == 3 or len(Numbers) == 1)):
-            return True
-        else:
-            return False
+        # Colors = set([str(card.getColor()) for card in chosenCards])
+        # Fills = set([card.getFill() for card in chosenCards])
+        # Shapes = set([card.getShape() for card in chosenCards])
+        # Numbers = set([card.getNumber() for card in chosenCards])
+        # if (len(Colors) == 3 or len(Colors) == 1) and (len(Fills) == 3 or len(Fills) == 1) and (len(Shapes) == 3 or len(Shapes) == 1) and ((len(Numbers) == 3 or len(Numbers) == 1)):
+        #     return True
+        # else:
+        #     return False
         return True
     
     def canGameContinue(self,deck):
-        return True
-        # import copy
-        # if deck.getNumberOfCardsOndesk() == consts.DESK_CARDS_CAPACITY:
-        #     for i in range(0, consts.DESK_CARDS_CAPACITY - 2):
-        #         setDraft = [-1, -1, -1]
-        #         setDraft[0] = deck.deskCards[i]
-        #         for j in range(i + 1,consts.DESK_CARDS_CAPACITY - 1 ):
-        #             setDraft[1] = deck.deskCards[j]
-        #             for k in range(j + 1, consts.DESK_CARDS_CAPACITY):
-        #                 setDraft[2] = deck.deskCards[k]
-        #                 print(setDraft)
-        #                 if self.validateSet(setDraft):
-        #                     return True
-        #     return False
-        # elif (deck.getNumberOfCardsOndesk() == 0) and (len(deck.cardPool) == 0):
-        #         return False
-        # else:
-        #     if len(deck.cardPool) == 0:
-        #         if deck.getNumberOfCardsOndesk() == 0:
-        #             return False
-        #         else:
-        #             deskCardsDraft = copy.deepcopy(deck.deskCards)
-        #             for i in range(0, deskCardsDraft.count(-1)):
-        #                 deskCardsDraft.remove(-1)
-        #             for i in range(0, len(deskCardsDraft) - 2):
-        #                 setDraft = [-1, -1, -1]
-        #                 setDraft[0] = deskCardsDraft[i]
-        #                 for j in range(i + 1, len(deskCardsDraft) - 1):
-        #                     setDraft[1] = deskCardsDraft[j]
-        #                     for k in range(j + 1, len(deskCardsDraft)):
-        #                         setDraft[2] = deskCardsDraft[k]
-        #                         print(setDraft)
-        #                         if self.validateSet(setDraft):
-        #                             return True
-        #             return False
-        #     else:
-        #         return True
+        import copy
+        if deck.getNumberOfCardsOndesk() == consts.DESK_CARDS_CAPACITY:
+            for i in range(0, consts.DESK_CARDS_CAPACITY - 2):
+                setDraft = [-1, -1, -1]
+                setDraft[0] = deck.deskCards[i]
+                for j in range(i + 1,consts.DESK_CARDS_CAPACITY - 1 ):
+                    setDraft[1] = deck.deskCards[j]
+                    for k in range(j + 1, consts.DESK_CARDS_CAPACITY):
+                        setDraft[2] = deck.deskCards[k]
+                        print(setDraft)
+                        if self.validateSet(setDraft):
+                            return True
+            return False
+        elif (deck.getNumberOfCardsOndesk() == 0) and (len(deck.cardPool) == 0):
+                return False
+        else:
+            if len(deck.cardPool) == 0:
+                if deck.getNumberOfCardsOndesk() == 0:
+                    return False
+                else:
+                    deskCardsDraft = copy.deepcopy(deck.deskCards)
+                    for i in range(0, deskCardsDraft.count(-1)):
+                        deskCardsDraft.remove(-1)
+                    for i in range(0, len(deskCardsDraft) - 2):
+                        setDraft = [-1, -1, -1]
+                        setDraft[0] = deskCardsDraft[i]
+                        for j in range(i + 1, len(deskCardsDraft) - 1):
+                            setDraft[1] = deskCardsDraft[j]
+                            for k in range(j + 1, len(deskCardsDraft)):
+                                setDraft[2] = deskCardsDraft[k]
+                                print(setDraft)
+                                if self.validateSet(setDraft):
+                                    return True
+                    return False
+            else:
+                return True
         
 
     def validateView(self,deck,ui):
@@ -125,12 +124,16 @@ class GameController:
             container.append(img)
 
     def resizeCardToChosen(self,card):
+        if card == -1:
+            return None
         pilImage = Image.open(card.getUrl())
         resize = self.resize(pilImage,consts.CHOSEN_RESIZE_RATIO)
         img = ImageTk.PhotoImage(resize)
         return img
 
     def resizeCardToNormal(self,card):
+        if card == -1: 
+            return None
         pilImage = Image.open(card.getUrl())
         resize = self.resize(pilImage,consts.RESIZE_RATIO)
         img = ImageTk.PhotoImage(resize)
@@ -169,8 +172,9 @@ class GameController:
         return lambda:self.fillDesk(deck,ui)
 
     def fillDesk(self,deck,ui):
-        deck.fillDesk()
-        ui.setGameBody(ui.bodyFrame)
+        filled = deck.fillDesk()
+        self.loadCardsImage(ui.deck.deskCards,ui.deskCardImages)
+        ui.showCards(filled,ui.bodyFrame)
     
     def getCurrentGameLog(self,deck):
         return "you have finished "+str(len(deck.finishCards))+"cards. "+str(len(deck.cardDict)-len(deck.finishCards))+" cards left."
