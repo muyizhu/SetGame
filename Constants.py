@@ -55,3 +55,12 @@ RESTART_COL = 0
 #message
 MESSAGE_ROW = 6
 MESSAGE_COL = 3
+
+#music
+MUSIC_PATH_LIST = []
+CLICK_SOUND = './Sound/clickCard.wav'
+FIND_SET_SOUND = './Sound/setCorrect.mp3'
+REPLACE_CARD_SOUND = './Sound/replaceCard.wav'
+REPLACE_ALL = './Sound/replaceAll.wav'
+SOUND_VOLUME = 0.2
+MUSIC_VOLUME = 0.2

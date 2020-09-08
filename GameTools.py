@@ -1,6 +1,7 @@
 import Constants as consts
 from PIL import Image, ImageTk 
 import tkinter.messagebox
+import Music
 class GameValidator:
     def _init_(self):
         pass
@@ -152,6 +153,7 @@ class GameController:
         needToBack = -1
         thick = consts.NORMAL_THICKNESS
         if card not in deck.chosenCards:
+            Music.clickSound.play()
             needToBack = deck.chooseCardFromDesk(key)
             relief = "sunken"
             thick = consts.CHOSEN_THICKNESS
@@ -197,6 +199,7 @@ class GameController:
         return lambda: self.replaceAllCards(deck,ui)
 
     def replaceAllCards(self,deck,ui):
+        Music.replaceAll.play()
         keys = deck.findKeysOfDeskCards()
         replace = deck.changeDeskCards(keys)
         # ui.deskCardImages=[]
@@ -209,6 +212,7 @@ class GameController:
         return  lambda event,p=pui: self.replaceCard(event,p)
     
     def replaceCard(self,event, positionandui):
+        Music.replaceSound.play()
         ui = positionandui[1]
         deck = ui.deck
         if len(ui.deck.cardPool)==0:
