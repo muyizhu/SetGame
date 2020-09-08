@@ -10,7 +10,7 @@ class Platfrom:
         self.cardsOnDesk = []
         self.chosenCards = []
         self.historicalCards = []
-        self.totalCardsNumber = 45 #len(deck.cardList)
+        self.totalCardsNumber = len(deck.cardList)
 
     def getNumberOfCardsOnDesk(self):
         count = 0
@@ -93,6 +93,5 @@ class Platfrom:
         self.clearHistory()
         self.cancelAllChosen()
         self.cardPool = copy.deepcopy(self.deck.shuffle())
-        self.cardPool = self.cardPool[:33]
         print(len(self.cardPool))
         self.fillCardsOnDesk()

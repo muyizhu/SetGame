@@ -10,19 +10,19 @@ class GameValidator:
         pass
 
     def validateSet(self, chosenCards):
-        if len(chosenCards) == 3:
-            return True
-        else:
-            return False
-         # Colors = set([str(card.getColor()) for card in chosenCards])
-         # Fills = set([card.getFill() for card in chosenCards])
-         # Shapes = set([card.getShape() for card in chosenCards])
-         # Numbers = set([card.getNumber() for card in chosenCards])
-         # if (len(Colors) == 3 or len(Colors) == 1) and (len(Fills) == 3 or len(Fills) == 1) and (
-         #         len(Shapes) == 3 or len(Shapes) == 1) and ((len(Numbers) == 3 or len(Numbers) == 1)) and len(chosenCards) == 3:
-         #     return True
-         # else:
-         #     return False
+        # if len(chosenCards) == 3:
+        #     return True
+        # else:
+        #     return False
+         Colors = set([str(card.getColor()) for card in chosenCards])
+         Fills = set([card.getFill() for card in chosenCards])
+         Shapes = set([card.getShape() for card in chosenCards])
+         Numbers = set([card.getNumber() for card in chosenCards])
+         if (len(Colors) == 3 or len(Colors) == 1) and (len(Fills) == 3 or len(Fills) == 1) and (
+                 len(Shapes) == 3 or len(Shapes) == 1) and ((len(Numbers) == 3 or len(Numbers) == 1)) and len(chosenCards) == 3:
+             return True
+         else:
+             return False
 
     def canGameContinue(self, platform):
         if platform.getNumberOfCardsOnDesk() == consts.DESK_CARDS_CAPACITY:
