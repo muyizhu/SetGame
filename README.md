@@ -1,10 +1,9 @@
 How To Run The Program:
 
-1.  the zipped SETGAME file and Unzip the file 
-2.  open the zipped SetGame folder with IDE. 
-3.  open command line and running command “pip install Pillow”， which install the dependency pakage called Pillow
-4.  in command line，running “pip install pygame”. which installed the dependency called pygame
-5.  find SetGame.py in your ide, run it "
+1.  Download the zipped SETGAME file and Unzip the file 
+2.  open command line and running command “pip install Pillow”， which install the dependency pakage called Pillow
+3.  in command line，running “pip install pygame”. which installed the dependency called pygame
+4.  open the unziped SetGame folder with your IDE then run ‘SetGame.py’ file or in command line type “Python ”,then drag the "SetGame.py" after "Python "
 
 Game Rules:
 
