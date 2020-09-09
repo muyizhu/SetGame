@@ -17,3 +17,5 @@ Fill Desk: When desk has empty positions and there still has cards left in deck,
 Submit: Check the three cards you chose if they can make a set. If they make a set, they will be removed from board.
 
 Timer: Record how fast you can finish the game
+
+Track Message: Show how many cards you have finished and how many cards still left in deck  
