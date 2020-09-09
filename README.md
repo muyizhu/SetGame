@@ -1,22 +1,15 @@
-# SetAssignment
-Things we will need to do:
+How To Run The Program
 
---Develop a process for determining if 3 cards form a set
-  
---Develop a process for displaying either 12 or 15 cards in a Grid
-  
---We will need to be able to interact with the cards...to select 3
-  
---For the game itself, we will need to be able to start a new game, let the user select 3 cards, check to see if the 3 cards form a set:  if so, remove the cards and insert new cards from the deck.  if not, clear the card selection and indicate that the selection did not form a set
-  
---Once the deck is empty, and no sets are possible, end the game
-  
---Track things like time, number of sets found, etc...
+Download the zipped SETGAME file. Unzip the file and use your IDE to open this project. Before you run SETGAME.py, you should install two packages which commands are “pip install Pillow” and “pip install pygame”. Then you will be able to run SETGAME.py file and start the game. 
 
-For Topics I students: the expectation is that a basic game can be played
+Game Rules
 
-For Topics II students: the expectation is that a basic game can be played, and statistics can be tracked and displayed.  Additional features are appreciated.
+Each of the cardsThere have different characteristics which are Colors (red, green, blue and yellow), Numbers (1, 2, 3), Shapes (circle, square, triangle) and Fills ( clear, shaded, solid ). You need form sets by using card on desk and deck until all the cards are used or there is no more set can be formed. The rule of forming a set is selecting exact three cards from the available cards on the board and the each of characteristics of the cards should be either the same or different. For example, set 1 can be {blue clear circle1, blue clear circle2, blue clear circle3} which have same color, shape and fill but different in number. Or set 2 which is {red solid square1, blue sgaded circle2, yellow clear triangle3} where none of their characteristics are the same.
 
-You should be able to explain your decisions regarding game mechanics.  What process did you use to display your cards? What process did you use to determine if the 3 cards form a set? 
+Game Function
 
-We will play each other's games and provide feedback
+restart game: Start a new game. Reshuffle the deck and deal cards to board. Clear hitorical sets and timer
+Replace Card: When you can't form a set by using cards on board, you can right click card to replace it or you can use the button Replace Cards to replace all the cards on board.               The replaced card will go back to beck. IMPORTANT: Replace Card funtion can be used only when there still has cards left in deck. If the number of left cards is 0,                 replace function will not work.  
+Fill desk: When desk has empty positions and there still has cards left in deck, you can click Fill Desk botton to fill the empty postions.
+Submit: Check the three cards you chose if they can make a set. If they make a set, they will be removed from board.
+Timer: Record how fast you can finish the game
