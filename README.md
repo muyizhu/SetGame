@@ -1,2 +1,2 @@
-Main file is SetGame.py
+Main file is SETGAME.py
 
